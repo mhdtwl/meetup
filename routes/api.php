@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 
 Route::namespace("ApiV1")->group(function () {
+    Route::get("/users", "LoginController@users");
 
     Route::post("/login", "LoginController@login");//->name('login');;
 

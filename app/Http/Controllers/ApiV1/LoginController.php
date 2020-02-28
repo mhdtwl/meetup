@@ -35,4 +35,9 @@ class LoginController extends Controller
          return User::all();
          //return response()->json( , 200);
      }
+
+     public function users()
+     {
+         return User::all();
+     }
 }
