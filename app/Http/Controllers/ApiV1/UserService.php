@@ -7,7 +7,7 @@ use App\Traits\SearchableTrait;
 use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserService extends Controller
 {
     use SearchableTrait;
 //    /**

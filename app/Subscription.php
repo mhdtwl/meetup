@@ -168,7 +168,7 @@ class Subscription extends Model
     public static function myInvitations($userId)
     {
         return Subscription::whereIn('status', Subscription::STATUS_LIST)
-            ->where('invited_by_id', $userId)->orderBy('status');
+            ->where('invited_by_id', $userId)->orderBy('status')->orderBy('updated_at','desc');
     }
 
 

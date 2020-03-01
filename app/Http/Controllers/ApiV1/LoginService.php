@@ -9,11 +9,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-
-class LoginController extends Controller
+class LoginService extends Controller
 {
-
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     */
      public function login(Request $request)
      {
          $login = $request->validate([

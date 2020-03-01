@@ -16,14 +16,15 @@ use Illuminate\Http\Request;
 
 Route::namespace("ApiV1")->group(function () {
     // WebApp apis //?draw=1&length=10&column=0&search="11"&dir11=desc
-    Route::get("/users", "UserController@getSearchableUserTable");
+    Route::get("/users", "UserService@getSearchableUserTable");
     // auth
-    Route::post("/login", "LoginController@login");//->name('login');;
+    Route::post("/login", "LoginService@login");//->name('login');;
     // Subscription service.
     Route::prefix('/subscriber')->middleware('auth:api')->group(function () {
-        Route::get("/my-groups", "SubscriptionController@getMyGroups");
-        Route::get("/my-users", "SubscriptionController@getMyPeople");
-        Route::post("/invite", "SubscriptionController@inviteUserToGroup");
+        Route::get("/my-groups", "SubscriptionService@getMyGroups");
+        Route::get("/my-users", "SubscriptionService@getMyPeople");
+        Route::get("/my-invites", "SubscriptionService@getMyInvitations");
+        Route::post("/invite", "SubscriptionService@inviteUserToGroup");
     });
 
 });
