@@ -63,8 +63,7 @@ class Subscription extends Model
         $this->status = $status;
     }
 
-    //---------------------- Checks --------------------
-
+    /********************    Checks  *******************/
     public static function checkExistence($groupId, $userId)
     {
         $count = Subscription::where('group_id', $groupId)
@@ -73,7 +72,7 @@ class Subscription extends Model
         return ($count > 0) ? true : false;
     }
 
-    //----------------------User / Group Relation --------------------
+    /********************    User / Group Relation  *******************/
     private static function connectedGroupIds($userId)
     {
         return Subscription::whereIn('status', Subscription::STATUS_LIST_CONNECTED)
@@ -104,7 +103,7 @@ class Subscription extends Model
             ->get();
     }
 
-    ///------------------------User / User Relation ------------------
+    /********************    User / User Relation  *******************/
     private static function connectedUserIds($userId)
     {
         return Subscription::whereIn('group_id', Subscription::connectedGroupIds($userId))
@@ -134,7 +133,7 @@ class Subscription extends Model
             ->whereNotIn('id', $userIds);
     }
 
-    ///-------------------- User / Subscription (Group) Relation  ----------------------
+    /********************    User / Subscription (Group) Relation  *******************/
     /**
      * List of people who a user has at least one connection in a group.
      * @param $userId
@@ -172,7 +171,8 @@ class Subscription extends Model
     }
 
 
-    ///----------------------- Eloquent Relations -------------------
+
+    /********************    Eloquent Relations  *******************/
     public function group()
     {
         return $this->belongsTo(Group::class, 'group_id');

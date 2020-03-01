@@ -17,4 +17,10 @@ class UserController extends Controller
         $users =  User::paginate(10);
         return view('users.index', ['users' => $users]);
     }
+
+    public function getFirst10Users()
+    {
+        //$users =  User::orderBy('created_at')->//(10);
+        //return view('users.index', ['users' => $users]);
+    }
 }
