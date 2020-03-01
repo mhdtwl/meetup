@@ -34,9 +34,7 @@ class SubscriptionService extends Controller
     public function inviteUserToGroup(InviteUserToGroup $request)
     {
         $invitation = $this->createSubscription($request);
-        if ($invitation) {
-            return new SubscriptionResource ($invitation);
-        }
+        return new SubscriptionResource ($invitation);
     }
 
 

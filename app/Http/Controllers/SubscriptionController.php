@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InviteUserToGroup;
 use Illuminate\Http\Request;
 use App\Traits\SubscriptionTrait;
+use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
 {
@@ -42,34 +43,42 @@ class SubscriptionController extends Controller
 
     /**
      * Show user per group to invite
-     * @param $groupId
+     * @param int $groupId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($groupId)
+    public function show($groupId = 0)
     {
+        $validator = Validator::make(["groupId" => $groupId], [
+            'groupId' => 'required|numeric|exists:groups,id',
+        ]);
+        $validator->validated();
         return view('subscriptions.users', $this->showUsersToConnectByGroupId($groupId));
     }
 
     /**
      * Show invitation form
-     * @param $groupId
-     * @param $userId
+     * @param int $groupId
+     * @param int $userId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function invite($groupId, $userId)
+    public function invite($groupId = 0, $userId = 0)
     {
+        $validator = Validator::make(["groupId" => $groupId, "userId" => $userId], [
+            "InviteUserToGroup"
+        ]);
+        $validator->validated();
         return view('subscriptions.invite', $this->retrieveUserToInviteByGroupId($groupId, $userId));
     }
 
     /**
-     * TODO add thanks message for inviting /"Sent!, Thanks" : " Something went wrong!";
+     * TODO add thanks message for inviting on view |"Sent!, Thanks" : " Something went wrong!";
      * Store invitation
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param InviteUserToGroup $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(InviteUserToGroup $request)
     {
-        $message = $this->createSubscription($request);
-        return redirect()->action('SubscriptionController@myInvites')->with($message);
+        $newSubscription = $this->createSubscription($request);
+        return redirect()->action('SubscriptionController@myInvites')->with([$newSubscription]);
     }
 }

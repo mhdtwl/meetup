@@ -40,15 +40,13 @@ trait SubscriptionTrait
         $id = Auth::id();
         return Subscription::myInvitations($id)->paginate(Subscription::PAGINATION_OFFSET);
     }
-    //------------------------ Action ---------------------------
 
-    /**
-     * Returns a User & a Group to
-     * @param $groupId
-     * @param $userId
+    /***********************************    Action    *********************************
+     * @param int $groupId
+     * @param int $userId
      * @return array
      */
-    public function retrieveUserToInviteByGroupId($groupId, $userId): array
+    public function retrieveUserToInviteByGroupId($groupId=0, $userId=0): array
     {
         $group = Group::findorFail($groupId);
         $user = User::findorFail($userId);
@@ -57,10 +55,10 @@ trait SubscriptionTrait
 
     /**
      * Return list of users I know, suggested to be invited to a group.
-     * @param $groupId
+     * @param int $groupId
      * @return array
      */
-    public function showUsersToConnectByGroupId($groupId): array
+    public function showUsersToConnectByGroupId($groupId = 0): array
     {
         $id = Auth::id();
         $group = Group::findorFail($groupId);

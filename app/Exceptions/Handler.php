@@ -2,8 +2,9 @@
 
 namespace App\Exceptions;
 
-use Exception;
+use \Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class Handler extends ExceptionHandler
 {
@@ -29,12 +30,12 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception $exception
+     * @param  \Exception  $exception
      * @return void
      *
      * @throws \Exception
      */
-    public function report(Exception $exception)
+    public function report(\Exception $exception)
     {
         parent::report($exception);
     }
@@ -42,13 +43,13 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $exception
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws \Exception
      */
-    public function render($request, Exception $exception)
+    public function render($request, \Exception $exception)
     {
         if ($request->wantsJson()) {   //add Accept: application/json in request
             return $this->handleApiException($request, $exception);
@@ -57,11 +58,11 @@ class Handler extends ExceptionHandler
         }
     }
 
-    private function handleApiException($request, Exception $exception)
+    private function handleApiException($request,  $exception)
     {
         $exception = $this->prepareException($exception);
 
-        if ($exception instanceof \Illuminate\Http\Exception\HttpResponseException) {
+        if ($exception instanceof HttpResponseException) {
             $exception = $exception->getResponse();
         }
 

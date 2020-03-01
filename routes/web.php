@@ -18,24 +18,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function()
 {
-    //Route::prefix('/subscriptions')->group(function () {
-        // web invitation..
-        Route::get('/invite/{groupId}/{userId}', 'SubscriptionController@invite')->name("group.invite");
-        Route::get('/my/groups', 'SubscriptionController@myGroups')->name("myGroups");
-        Route::get('/my/people', 'SubscriptionController@myPeople')->name("myPeople");
-        Route::get('/my/invites', 'SubscriptionController@myInvites')->name("myInvites");
-    //});
+    // web invitation..
+    Route::get('/invite/{groupId}/{userId}', 'SubscriptionController@invite')->name("group.invite");
+    Route::get('/my/groups', 'SubscriptionController@myGroups')->name("myGroups");
+    Route::get('/my/people', 'SubscriptionController@myPeople')->name("myPeople");
+    Route::get('/my/invites', 'SubscriptionController@myInvites')->name("myInvites");
 
+    // all get
+    Route::get('users', 'UserController@index')->name('users.index');
+    Route::get('groups', 'GroupController@index')->name('groups.index');
     // all resource
-    Route::resource('users', 'UserController');
-    Route::resource('groups', 'GroupController');
-    Route::resource('interests', 'InterestController');
     Route::resource('subscriptions', 'SubscriptionController');
-    Route::resource('group-interest', 'GroupInterestController');
 });

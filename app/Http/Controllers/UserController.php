@@ -10,7 +10,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -18,9 +18,4 @@ class UserController extends Controller
         return view('users.index', ['users' => $users]);
     }
 
-    public function getFirst10Users()
-    {
-        //$users =  User::orderBy('created_at')->//(10);
-        //return view('users.index', ['users' => $users]);
-    }
 }

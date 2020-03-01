@@ -44,17 +44,16 @@ class Subscription extends Model
 
     const PAGINATION_OFFSET = 12;
 
-
     /**
-     * @param $groupId
-     * @param $userId
-     * @param $invitedById
+     * @param int $groupId
+     * @param int $userId
+     * @param int $invitedById
      * @param string $status
      */
     public function assignAttributes(
-        $groupId = null,
-        $userId = null,
-        $invitedById = null,
+        $groupId = 0,
+        $userId = 0,
+        $invitedById = 0,
         $status = Subscription::STATUS_PENDING
     ) {
         $this->group_id = $groupId;
@@ -63,27 +62,22 @@ class Subscription extends Model
         $this->status = $status;
     }
 
-    /********************    Checks  *******************/
-    public static function checkExistence($groupId, $userId)
-    {
-        $count = Subscription::where('group_id', $groupId)
-            ->where('user_id', $userId)
-            ->get()->count();
-        return ($count > 0) ? true : false;
-    }
-
-    /********************    User / Group Relation  *******************/
-    private static function connectedGroupIds($userId)
+    /********************    User / Group Relation  *******************
+     * @param int $userId
+     * @return mixed
+     */
+    private static function connectedGroupIds($userId=0)
     {
         return Subscription::whereIn('status', Subscription::STATUS_LIST_CONNECTED)
             ->where('user_id', $userId)
             ->get()->pluck('group_id')->toArray();
     }
+
     /**
-     * @param $userId
+     * @param int $userId
      * @return mixed
      */
-    public static function connectedGroups($userId)
+    public static function connectedGroups($userId=0)
     {
         return Group::whereIn('id', Subscription::connectedGroupIds($userId));
     }
@@ -91,10 +85,10 @@ class Subscription extends Model
     /**
      * TODO to use it somewhere [ not in use ] as  [ RSVP ]
      * The Groups of user can see but not in.
-     * @param $userId
-     * @return \Illuminate\Support\Collection
+     * @param int $userId
+     * @return mixed
      */
-    public static function unconnectedGroups($userId)
+    public static function unconnectedGroups($userId=0)
     {
         $getGroupAllStatusIds = Subscription::where('user_id', $userId)
             ->get()->pluck('group_id')->toArray();
@@ -103,19 +97,21 @@ class Subscription extends Model
             ->get();
     }
 
-    /********************    User / User Relation  *******************/
-    private static function connectedUserIds($userId)
+    /********************    User / User Relation  ******************
+     * @param int $userId
+     * @return mixed
+     */
+    private static function connectedUserIds($userId = 0)
     {
         return Subscription::whereIn('group_id', Subscription::connectedGroupIds($userId))
             ->distinct()->get()->pluck('user_id')->toArray();
     }
 
     /**
-     *
-     * @param $userId
-     * @return \Illuminate\Support\Collection
+     * @param int $userId
+     * @return mixed
      */
-    public static function connectedUsers($userId)
+    public static function connectedUsers($userId = 0)
     {
         $userIds = Subscription::connectedUserIds($userId);
         return User::where('id', '<>', $userId)
@@ -123,10 +119,10 @@ class Subscription extends Model
     }
 
     /**
-     * @param $userId
+     * @param int $userId
      * @return mixed
      */
-    public static function unconnectedUsers($userId)
+    public static function unconnectedUsers($userId = 0)
     {
         $userIds = Subscription::connectedUserIds($userId);
         return User::where('id', '<>', $userId)
@@ -136,24 +132,25 @@ class Subscription extends Model
     /********************    User / Subscription (Group) Relation  *******************/
     /**
      * List of people who a user has at least one connection in a group.
-     * @param $userId
+     * @param null $userId
      * @return mixed
      */
-    public static function myCurrentUsers($userId)
+    public static function myCurrentUsers($userId = null)
     {
-        return  Subscription::whereIn('group_id', Subscription::connectedGroupIds($userId))
-                ->where('user_id', '<>' , $userId)
-                ->whereIn('status', Subscription::STATUS_LIST_CONNECTED)
-                ->orderBy('user_id')
-                ->orderBy('group_id')
-                ->orderBy('invited_by_id');
+        return Subscription::whereIn('group_id', Subscription::connectedGroupIds($userId))
+            ->where('user_id', '<>', $userId)
+            ->whereIn('status', Subscription::STATUS_LIST_CONNECTED)
+            ->orderBy('user_id')
+            ->orderBy('group_id')
+            ->orderBy('invited_by_id');
     }
+
     /**
      * TODO to use it somewhere [ not in use ] as waiting request
-     * @param $userId
+     * @param int $userId
      * @return mixed
      */
-    public static function myPendingInvitations($userId)
+    public static function myPendingInvitations($userId = 0)
     {
         return Subscription::whereIn('status', Subscription::STATUS_PENDING)
             ->where('user_id', $userId)->orderBy('status');
@@ -161,15 +158,14 @@ class Subscription extends Model
 
     /**
      * List of people who have been invited to a group by this user.
-     * @param $userId
+     * @param int $userId
      * @return mixed
      */
-    public static function myInvitations($userId)
+    public static function myInvitations($userId = 0)
     {
         return Subscription::whereIn('status', Subscription::STATUS_LIST)
-            ->where('invited_by_id', $userId)->orderBy('status')->orderBy('updated_at','desc');
+            ->where('invited_by_id', $userId)->orderBy('status')->orderBy('updated_at', 'desc');
     }
-
 
 
     /********************    Eloquent Relations  *******************/
