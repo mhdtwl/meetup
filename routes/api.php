@@ -15,15 +15,15 @@ use Illuminate\Http\Request;
 
 
 Route::namespace("ApiV1")->group(function () {
-    // WebApp apis
+    // WebApp apis //?draw=1&length=10&column=0&search="11"&dir11=desc
     Route::get("/users", "UserController@getSearchableUserTable");
-    //?draw=1&length=10&column=0&dir11=desc
-
-
+    // auth
     Route::post("/login", "LoginController@login");//->name('login');;
-
-    Route::prefix('/user')->middleware('auth:api')->group(function () {
-        Route::get("/all", "LoginController@userAll");
+    // Subscription service.
+    Route::prefix('/subscriber')->middleware('auth:api')->group(function () {
+        Route::get("/my-groups", "SubscriptionController@getMyGroups");
+        Route::get("/my-users", "SubscriptionController@getMyPeople");
+        Route::post("/invite", "SubscriptionController@inviteUserToGroup");
     });
 
 });

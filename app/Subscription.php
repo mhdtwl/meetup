@@ -64,14 +64,6 @@ class Subscription extends Model
     }
 
     //---------------------- Checks --------------------
-    public static function getSubscription($groupId, $userId, $status = Subscription::STATUS_ACTIVE)
-    {
-        dd(Subscription::where('group_id', $groupId)
-            ->where('user_id', $userId)
-            ->get()
-            ->first());
-        return $x;
-    }
 
     public static function checkExistence($groupId, $userId)
     {
@@ -88,31 +80,25 @@ class Subscription extends Model
             ->where('user_id', $userId)
             ->get()->pluck('group_id')->toArray();
     }
-
-    /**
-     * The Groups of user can see and he's a member.
-     * @param $userId
-     * @return \Illuminate\Support\Collection
-     */
     /**
      * @param $userId
      * @return mixed
      */
     public static function connectedGroups($userId)
     {
-        return Group::whereIn('id', Subscription::connectedGroupIds($userId));//->get();
+        return Group::whereIn('id', Subscription::connectedGroupIds($userId));
     }
 
     /**
+     * TODO to use it somewhere [ not in use ] as  [ RSVP ]
      * The Groups of user can see but not in.
      * @param $userId
      * @return \Illuminate\Support\Collection
      */
-    public static function unconnectedGroups($userId)// I am not in  [ RSVP ]
+    public static function unconnectedGroups($userId)
     {
         $getGroupAllStatusIds = Subscription::where('user_id', $userId)
             ->get()->pluck('group_id')->toArray();
-        // todo to keep or to remove. // ->where('invited_by_id', '<>', $userId)
         return Group::whereIn('type', Group::VISIBLE_GROUP_TYPES)
             ->whereNotIn('id', $getGroupAllStatusIds)
             ->get();
@@ -126,6 +112,7 @@ class Subscription extends Model
     }
 
     /**
+     *
      * @param $userId
      * @return \Illuminate\Support\Collection
      */
@@ -136,13 +123,16 @@ class Subscription extends Model
             ->whereIn('id', $userIds);
     }
 
+    /**
+     * @param $userId
+     * @return mixed
+     */
     public static function unconnectedUsers($userId)
     {
         $userIds = Subscription::connectedUserIds($userId);
         return User::where('id', '<>', $userId)
-            ->whereNotIn('id', $userIds); //->paginate(Controller::PAGINATION_OFFSET);//->get();
+            ->whereNotIn('id', $userIds);
     }
-
 
     ///-------------------- User / Subscription (Group) Relation  ----------------------
     /**
@@ -160,6 +150,7 @@ class Subscription extends Model
                 ->orderBy('invited_by_id');
     }
     /**
+     * TODO to use it somewhere [ not in use ] as waiting request
      * @param $userId
      * @return mixed
      */
@@ -180,15 +171,6 @@ class Subscription extends Model
             ->where('invited_by_id', $userId)->orderBy('status');
     }
 
-    /**
-     * @param $userId
-     * @return mixed
-     */
-    public static function myConnections($userId)
-    {
-        return Subscription::whereIn('status', Subscription::STATUS_LIST_CONNECTED)
-            ->where('user_id', $userId)->orderBy('status');
-    }
 
     ///----------------------- Eloquent Relations -------------------
     public function group()

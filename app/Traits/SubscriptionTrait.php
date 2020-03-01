@@ -3,47 +3,44 @@
 namespace App\Traits;
 
 use App\Group;
+use App\Http\Requests\InviteUserToGroup;
 use App\Subscription;
 use App\User;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 
 trait SubscriptionTrait
 {
+    //---------------------- View -----------------------------
 
     /**
-     * Returns a listing of the resources. | (groups & users) connections
-     * @return array
+     * @return Paginator
      */
-    public function getUserConnections(): array
-    {
-        $groupConnected = $this->getUserGroupConnections();
-        $usersConnected = $this->getUserPeopleConnections();
-        return ['groups' => $groupConnected, 'users' => $usersConnected];
-    }
-
-    //---------------------------------------------------
-
-    public function getUserGroupConnections()
+    public function getUserGroupConnections(): Paginator
     {
         $id = Auth::id();
         return Subscription::connectedGroups($id)->simplePaginate(Subscription::PAGINATION_OFFSET);
     }
 
-    public function getUserPeopleConnections()
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function getUserPeopleConnections(): LengthAwarePaginator
     {
         $id = Auth::id();
         return Subscription::myCurrentUsers($id)->paginate(Subscription::PAGINATION_OFFSET);
     }
 
-    public function getUserPendingInvitations()
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function getUserPendingInvitations(): LengthAwarePaginator
     {
         $id = Auth::id();
         return Subscription::myInvitations($id)->paginate(Subscription::PAGINATION_OFFSET);
     }
-    //---------------------------------------------------
-
-
-
+    //------------------------ Action ---------------------------
 
     /**
      * Returns a User & a Group to
@@ -59,11 +56,11 @@ trait SubscriptionTrait
     }
 
     /**
-     * Return list of users suggested to be invited to a group.
+     * Return list of users I know, suggested to be invited to a group.
      * @param $groupId
      * @return array
      */
-    public function showUsersToConnectByGroupId($groupId): array // showMyUsersByGroup
+    public function showUsersToConnectByGroupId($groupId): array
     {
         $id = Auth::id();
         $group = Group::findorFail($groupId);
@@ -71,17 +68,21 @@ trait SubscriptionTrait
         return ['users' => $suggestedUsers, 'group' => $group];
     }
 
+
     /**
      * Create invitation by groupId & userId into db.
-     * @param $groupId
-     * @param $userId
-     * @return bool
+     * @param InviteUserToGroup $request
+     * @return Subscription
      */
-    public function createSubscription($groupId, $userId): bool
+    public function createSubscription(InviteUserToGroup $request): Subscription
     {
+        $validated = $request->validated();
+        $groupId = $validated['groupId'];
+        $userId = $validated['userId'];
         $subscription = new Subscription();
         $subscription->assignAttributes($groupId, $userId, Auth::id());
-        return $subscription->save();
+        $subscription->save();
+        return $subscription;
     }
 
 

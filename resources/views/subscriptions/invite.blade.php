@@ -32,20 +32,3 @@
         </div>
     </div>
 @endsection
-
-{{--<div class="row">--}}
-    {{--<div class="col-sm-4">--}}
-        {{--<div class="form-group">--}}
-            {{--<label>Group</label>--}}
-            {{--<input value="{{$group->name}}"--}}
-                   {{--class = 'form-control required' readonly  autofocus required />--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="col-sm-4">--}}
-        {{--<div class="form-group">--}}
-            {{--<label>User</label>--}}
-            {{--<input value="{{$user->name}}"--}}
-                   {{--class = 'form-control required' readonly  required />--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}

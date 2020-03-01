@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InviteUserToGroup;
 use Illuminate\Http\Request;
 use App\Traits\SubscriptionTrait;
 
 class SubscriptionController extends Controller
 {
     use  SubscriptionTrait;
+
     /**
      * Display a listing of the resource. // my connections
      *
@@ -15,14 +17,15 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        return $this->myGroups();//view('subscriptions.groups', $this->getUserConnections());
+
+        return $this->myGroups();
     }
 
     ///--------------------------------------Views -----------------
     public function myGroups()
     {
-
-        return view('subscriptions.user.myGroups', ["groups" => $this->getUserGroupConnections(), 'colors' => $this::GUI_COLORS ]);
+        return view('subscriptions.user.myGroups',
+            ["groups" => $this->getUserGroupConnections(), 'colors' => $this::GUI_COLORS]);
     }
 
     public function myPeople()
@@ -35,7 +38,20 @@ class SubscriptionController extends Controller
         return view('subscriptions.user.myInvites', ["subscriptions" => $this->getUserPendingInvitations()]);
     }
 
+    ///--------------------------- Actions -----------------
+
     /**
+     * Show user per group to invite
+     * @param $groupId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($groupId)
+    {
+        return view('subscriptions.users', $this->showUsersToConnectByGroupId($groupId));
+    }
+
+    /**
+     * Show invitation form
      * @param $groupId
      * @param $userId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -45,25 +61,15 @@ class SubscriptionController extends Controller
         return view('subscriptions.invite', $this->retrieveUserToInviteByGroupId($groupId, $userId));
     }
 
-
     /**
+     * TODO add thanks message for inviting /"Sent!, Thanks" : " Something went wrong!";
+     * Store invitation
      * @param Request $request
-     * @return string
-     */
-    public function store(Request $request)
-    {
-        //$responseMessage =
-        $this->createSubscription($request->groupId, $request->userId) ?  "Sent!, Thanks" : " Something went wrong!";
-        return $this->myInvites();// $responseMessage;
-    }
-
-    /**
-     * @param $groupId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($groupId)// showMyUsersByGroup
+    public function store(InviteUserToGroup $request)
     {
-        return view('subscriptions.users',  $this->showUsersToConnectByGroupId($groupId));
+        $message = $this->createSubscription($request);
+        return redirect()->action('SubscriptionController@myInvites')->with($message);
     }
-
 }

@@ -17,7 +17,6 @@
                     <td>  {{ $model_item->name }}   </td>
                     <td>  {{ $model_item->email }}   </td>
                     <td>  <a href="{{route('group.invite',  [  $group->id,   $model_item->id])}}">Invite to {{$group->name}}</a>  </td>
-                    {{--."/".$model_item->id}}--}}
                 </tr>
             @endforeach
             </tbody>

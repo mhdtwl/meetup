@@ -1,6 +1,6 @@
 @extends('layouts.index')
 @section('model-content')
-    <div class="card-header">My Invited users to groups</div>
+    <div class="card-header">My invitations ( users to groups ) </div>
     <div class="card-body">
         <table id="table" class="table table-bordered table-hover dataTable"
                role="grid" aria-describedby="example1_info">
