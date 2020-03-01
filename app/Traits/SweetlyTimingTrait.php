@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Carbon\Carbon;
 
-trait SweetyTimingTrait
+trait SweetlyTimingTrait
 {
     public function getCarbonCreatedAt($data)
     {

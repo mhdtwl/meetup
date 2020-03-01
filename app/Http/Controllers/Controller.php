@@ -10,4 +10,6 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected const GUI_COLORS = ['default','primary','secondary','success','danger','warning','info','light','dark'];
 }

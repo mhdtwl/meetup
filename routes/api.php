@@ -15,7 +15,10 @@ use Illuminate\Http\Request;
 
 
 Route::namespace("ApiV1")->group(function () {
-    Route::get("/users", "LoginController@users");
+    // WebApp apis
+    Route::get("/users", "UserController@getSearchableUserTable");
+    //?draw=1&length=10&column=0&dir11=desc
+
 
     Route::post("/login", "LoginController@login");//->name('login');;
 
@@ -24,3 +27,4 @@ Route::namespace("ApiV1")->group(function () {
     });
 
 });
+

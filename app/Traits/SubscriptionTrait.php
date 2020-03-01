@@ -16,11 +16,34 @@ trait SubscriptionTrait
      */
     public function getUserConnections(): array
     {
-        $id = Auth::id();
-        $groupConnected = Subscription::connectedGroups($id)->paginate(Subscription::PAGINATION_OFFSET);
-        $usersConnected = Subscription::connectedUsers($id)->paginate(Subscription::PAGINATION_OFFSET);
+        $groupConnected = $this->getUserGroupConnections();
+        $usersConnected = $this->getUserPeopleConnections();
         return ['groups' => $groupConnected, 'users' => $usersConnected];
     }
+
+    //---------------------------------------------------
+
+    public function getUserGroupConnections()
+    {
+        $id = Auth::id();
+        return Subscription::connectedGroups($id)->simplePaginate(Subscription::PAGINATION_OFFSET);
+    }
+
+    public function getUserPeopleConnections()
+    {
+        $id = Auth::id();
+        return Subscription::myCurrentUsers($id)->paginate(Subscription::PAGINATION_OFFSET);
+    }
+
+    public function getUserPendingInvitations()
+    {
+        $id = Auth::id();
+        return Subscription::myInvitations($id)->paginate(Subscription::PAGINATION_OFFSET);
+    }
+    //---------------------------------------------------
+
+
+
 
     /**
      * Returns a User & a Group to
@@ -56,7 +79,8 @@ trait SubscriptionTrait
      */
     public function createSubscription($groupId, $userId): bool
     {
-        $subscription = new Subscription($groupId, $userId, Auth::id());
+        $subscription = new Subscription();
+        $subscription->assignAttributes($groupId, $userId, Auth::id());
         return $subscription->save();
     }
 

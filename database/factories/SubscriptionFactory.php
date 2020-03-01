@@ -16,7 +16,7 @@ $factory->define(Subscription::class, function (Faker $faker) {
     return [
         'group_id' => $gId,
         'user_id' =>   $uId,
-        'invited_by_id' =>  $faker->randomElement($userIds),
+        'invited_by_id' => $faker->randomElement($userIds),
         'status' =>  $faker->randomElement(Subscription::STATUS_LIST),
     ];
 });

@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\SweetlyTimingTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
+    use SweetlyTimingTrait;
+
     const VISIBLE_GROUP_TYPES = ['closed', 'public'];
     const GROUP_TYPES = ['private', 'closed', 'public'];
 

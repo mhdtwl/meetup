@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\Controllers\Controller;
+use App\Traits\SweetlyTimingTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -15,36 +16,42 @@ use Illuminate\Support\Facades\DB;
  */
 class Subscription extends Model
 {
+    use SweetlyTimingTrait;
     /**
      * table_name = subscriptions
      * ------------------------------------------
      *  pending : out of group | has a request to join  the group. [needs an approval, user or group admin]
+     *  canceled:   inactive member
      *  active : in group  | active member
+     *  left:       inactive member
      *  blocked : out of group  | blocked from this group
      */
 
     const STATUS_PENDING = 'pending';
     const STATUS_ACTIVE = 'active';
+    const STATUS_CANCELED = 'cancelled';
+    const STATUS_LEFT = 'left';
     const STATUS_BLOCKED = 'blocked';
 
     const STATUS_LIST_CONNECTED = [Subscription::STATUS_PENDING, Subscription::STATUS_ACTIVE];
     const STATUS_LIST = [
         Subscription::STATUS_PENDING,
         Subscription::STATUS_ACTIVE,
+        Subscription::STATUS_CANCELED,
+        Subscription::STATUS_LEFT,
         Subscription::STATUS_BLOCKED
     ];
 
-    const PAGINATION_OFFSET = 5;
+    const PAGINATION_OFFSET = 12;
 
 
     /**
-     * Subscription constructor.
      * @param $groupId
      * @param $userId
      * @param $invitedById
      * @param string $status
      */
-    public function __construct(
+    public function assignAttributes(
         $groupId = null,
         $userId = null,
         $invitedById = null,
@@ -138,14 +145,38 @@ class Subscription extends Model
 
 
     ///-------------------- User / Subscription (Group) Relation  ----------------------
+    /**
+     * List of people who a user has at least one connection in a group.
+     * @param $userId
+     * @return mixed
+     */
+    public static function myCurrentUsers($userId)
+    {
+        return  Subscription::whereIn('group_id', Subscription::connectedGroupIds($userId))
+                ->where('user_id', '<>' , $userId)
+                ->whereIn('status', Subscription::STATUS_LIST_CONNECTED)
+                ->orderBy('user_id')
+                ->orderBy('group_id')
+                ->orderBy('invited_by_id');
+    }
+    /**
+     * @param $userId
+     * @return mixed
+     */
+    public static function myPendingInvitations($userId)
+    {
+        return Subscription::whereIn('status', Subscription::STATUS_PENDING)
+            ->where('user_id', $userId)->orderBy('status');
+    }
 
     /**
+     * List of people who have been invited to a group by this user.
      * @param $userId
      * @return mixed
      */
     public static function myInvitations($userId)
     {
-        return Subscription::whereIn('status', Subscription::STATUS_LIST_CONNECTED)
+        return Subscription::whereIn('status', Subscription::STATUS_LIST)
             ->where('invited_by_id', $userId)->orderBy('status');
     }
 

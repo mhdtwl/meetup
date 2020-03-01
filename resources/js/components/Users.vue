@@ -1,4 +1,3 @@
-
 <template>
     <div class="items">
         <div class="tableFilters">
@@ -13,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <datatable :columns="columns" :sortKey="sortKey" :sortOrders="sortOrders" @sort="sortBy">
+        <datatable :columns="columns" :sortKey="sortKey" class="table-bordered table-hover dataTable" :sortOrders="sortOrders" @sort="sortBy">
             <tbody>
             <tr v-for="item in items" :key="item.id">
                 <td>{{item.name}}</td>
@@ -27,24 +26,31 @@
         </pagination>
     </div>
 </template>
+
 <script>
-    import TableTemplate from './TableTemplate.vue';
+
+
+    import MyDatatable from './MyDatatable.vue';
+    import Pagination from './Pagination.vue';
+
 
     export default {
-        extends:TableTemplate,
+        components: { datatable: MyDatatable, pagination: Pagination },
+        created() {
+            this.getItems();
+        },
         data() {
-            let end_point_url = '/api/users'
+            let sortOrders = {};
+
             let columns = [
-                {width: '50%', label: 'Name', name: 'name' },
-                {width: '50%', label: 'Email', name: 'email'},
+                {width: '50%', label: ' ↕   Name', name: 'name' },
+                {width: '50%', label: ' ↕   Email', name: 'email'},
             ];
 
-            let sortOrders = {};
             columns.forEach((column) => {
                 sortOrders[column.name] = -1;
             });
             return {
-                endPointUrl: end_point_url,
                 items: [],
                 columns: columns,
                 sortKey: columns[0],
@@ -55,7 +61,7 @@
                     length: 10,
                     search: '',
                     column: 0,
-                    dir: 'desc',
+                    dir: 'asc',
                 },
                 pagination: {
                     lastPage: '',
@@ -68,6 +74,42 @@
                     to: ''
                 },
             }
+        },
+        methods: {
+            getItems(url = '/api/users') {
+                this.tableData.draw++;
+                axios.get(url, {params: this.tableData})
+                    .then(response => {
+                        let data = response.data;
+                        if (this.tableData.draw == data.draw) {
+                            this.items = data.data.data;
+                            this.configPagination(data.data);
+                        }
+                    })
+                    .catch(errors => {
+                        console.log(errors);
+                    });
+            },
+            configPagination(data) {
+                this.pagination.lastPage = data.last_page;
+                this.pagination.currentPage = data.current_page;
+                this.pagination.total = data.total;
+                this.pagination.lastPageUrl = data.last_page_url;
+                this.pagination.nextPageUrl = data.next_page_url;
+                this.pagination.prevPageUrl = data.prev_page_url;
+                this.pagination.from = data.from;
+                this.pagination.to = data.to;
+            },
+            sortBy(key) {
+                this.sortKey = key;
+                this.sortOrders[key] = this.sortOrders[key] * -1;
+                this.tableData.column = this.getIndex(this.columns, 'name', key);
+                this.tableData.dir = this.sortOrders[key] === 1 ? 'asc' : 'desc';
+                this.getItems();
+            },
+            getIndex(array, key, value) {
+                return array.findIndex(i => i[key] == value)
+            },
         }
     };
 </script>

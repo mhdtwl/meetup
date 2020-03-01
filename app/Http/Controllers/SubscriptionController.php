@@ -2,13 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Group;
-use App\Subscription;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-
 use App\Traits\SubscriptionTrait;
 
 class SubscriptionController extends Controller
@@ -21,7 +15,24 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        return view('subscriptions.groups', $this->getUserConnections());
+        return $this->myGroups();//view('subscriptions.groups', $this->getUserConnections());
+    }
+
+    ///--------------------------------------Views -----------------
+    public function myGroups()
+    {
+
+        return view('subscriptions.user.myGroups', ["groups" => $this->getUserGroupConnections(), 'colors' => $this::GUI_COLORS ]);
+    }
+
+    public function myPeople()
+    {
+        return view('subscriptions.user.myUsers', ["users" => $this->getUserPeopleConnections()]);
+    }
+
+    public function myInvites()
+    {
+        return view('subscriptions.user.myInvites', ["subscriptions" => $this->getUserPendingInvitations()]);
     }
 
     /**
@@ -41,8 +52,9 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        $responseMessage = $this->createSubscription($request->groupId, $request->userId) ?  "Sent!, Thanks" : " Something went wrong!";
-        return $responseMessage;
+        //$responseMessage =
+        $this->createSubscription($request->groupId, $request->userId) ?  "Sent!, Thanks" : " Something went wrong!";
+        return $this->myInvites();// $responseMessage;
     }
 
     /**

@@ -11,6 +11,6 @@ class GroupInterestsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\GroupInterest::class, 30)->create();
+        factory(App\GroupInterest::class, 300)->create();
     }
 }
