@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "06e84b05-b3ee-4ba7-913b-5a83cc067c73",
+		"name": "Meetup AWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "subscirber - profile",
+			"item": [
+				{
+					"name": "subscriber/my-groups",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6fcc438c-0871-48ca-ad8e-f044c67c9c09",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzAwY2QwOTE2MTQxN2QzN2M0NTJkYmYzNGY3ZjA2ZmU3MTI4NGQ3MjdhOTY4YTUzYmQ5ZWE5NWVhNWNjZThlMmUxY2YxNzM3YTI4NjgxNjUiLCJpYXQiOjE1ODQ5MTc1MTMsIm5iZiI6MTU4NDkxNzUxMywiZXhwIjoxNjE2NDUzNTEzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.zKpXcUJwpcixxiVxqt_c_fpumY1lySeC77u3KavCOskIjHOGdz-XI9PQ9uRa84DZw3zhC3OPK0FQK1rRwPM-fL6dV36S_l9FcjH9e_7Egv2FM2MIXGZBoqCiyEJNe8m3dVDZfei_uhdSsyrtpYL3CFVb9ukcuPNCWhlda1OxANFk1Opb_5g_gD_ezRFC1RXyG5bAA5n40pDU_NEW08Aq0o_sjy3oolTPxs5Vfh2PE88V2QCOHJpIVZ500uMJpn375tlq0UeOz1FdVrojOHVdFtpriaQO7so5zaYPEzo12QN3nbKoKpkpplC0im2_l_tmhSfcAYtH0uOfeKqZ3A1T5sH4QYxGVCmHZuws5ZB2ai38DwzUGIJit5m5-LTrOYzMKHvROXHiSnpHKXiHQKP7IW6LPvRa1WwaJhg3EnsN1rs-qp8liRfBTGemOGIkgP7DfOVB2IF6_ml6YKgtYMl33IBBTYSN9XWlSTvDsuf5MJjvk7BrtFtId_djn5plugcMYsnMgzfoChBw1_0QNFWUOOu3TfcZhcLwi7652jSEuVeahbzFTDJ5TRg8gnExqWsjh-8Vhc6oNRHEFbMDASlaalwGNFMiqPHCAtN1yusR99VfEaZxtPlqC-XNB-RcTED8tKjy5mF2z-XMfCnKcICqp0j48BlD75jDdRztk1m300Q",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/subscriber/my-groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"my-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriber/my-users",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ba8acbb5-bd07-4cf2-9704-779c8ebddcca",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzAwY2QwOTE2MTQxN2QzN2M0NTJkYmYzNGY3ZjA2ZmU3MTI4NGQ3MjdhOTY4YTUzYmQ5ZWE5NWVhNWNjZThlMmUxY2YxNzM3YTI4NjgxNjUiLCJpYXQiOjE1ODQ5MTc1MTMsIm5iZiI6MTU4NDkxNzUxMywiZXhwIjoxNjE2NDUzNTEzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.zKpXcUJwpcixxiVxqt_c_fpumY1lySeC77u3KavCOskIjHOGdz-XI9PQ9uRa84DZw3zhC3OPK0FQK1rRwPM-fL6dV36S_l9FcjH9e_7Egv2FM2MIXGZBoqCiyEJNe8m3dVDZfei_uhdSsyrtpYL3CFVb9ukcuPNCWhlda1OxANFk1Opb_5g_gD_ezRFC1RXyG5bAA5n40pDU_NEW08Aq0o_sjy3oolTPxs5Vfh2PE88V2QCOHJpIVZ500uMJpn375tlq0UeOz1FdVrojOHVdFtpriaQO7so5zaYPEzo12QN3nbKoKpkpplC0im2_l_tmhSfcAYtH0uOfeKqZ3A1T5sH4QYxGVCmHZuws5ZB2ai38DwzUGIJit5m5-LTrOYzMKHvROXHiSnpHKXiHQKP7IW6LPvRa1WwaJhg3EnsN1rs-qp8liRfBTGemOGIkgP7DfOVB2IF6_ml6YKgtYMl33IBBTYSN9XWlSTvDsuf5MJjvk7BrtFtId_djn5plugcMYsnMgzfoChBw1_0QNFWUOOu3TfcZhcLwi7652jSEuVeahbzFTDJ5TRg8gnExqWsjh-8Vhc6oNRHEFbMDASlaalwGNFMiqPHCAtN1yusR99VfEaZxtPlqC-XNB-RcTED8tKjy5mF2z-XMfCnKcICqp0j48BlD75jDdRztk1m300Q",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/subscriber/my-users?page=3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"my-users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriber/my-invites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNzAwY2QwOTE2MTQxN2QzN2M0NTJkYmYzNGY3ZjA2ZmU3MTI4NGQ3MjdhOTY4YTUzYmQ5ZWE5NWVhNWNjZThlMmUxY2YxNzM3YTI4NjgxNjUiLCJpYXQiOjE1ODQ5MTc1MTMsIm5iZiI6MTU4NDkxNzUxMywiZXhwIjoxNjE2NDUzNTEzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.zKpXcUJwpcixxiVxqt_c_fpumY1lySeC77u3KavCOskIjHOGdz-XI9PQ9uRa84DZw3zhC3OPK0FQK1rRwPM-fL6dV36S_l9FcjH9e_7Egv2FM2MIXGZBoqCiyEJNe8m3dVDZfei_uhdSsyrtpYL3CFVb9ukcuPNCWhlda1OxANFk1Opb_5g_gD_ezRFC1RXyG5bAA5n40pDU_NEW08Aq0o_sjy3oolTPxs5Vfh2PE88V2QCOHJpIVZ500uMJpn375tlq0UeOz1FdVrojOHVdFtpriaQO7so5zaYPEzo12QN3nbKoKpkpplC0im2_l_tmhSfcAYtH0uOfeKqZ3A1T5sH4QYxGVCmHZuws5ZB2ai38DwzUGIJit5m5-LTrOYzMKHvROXHiSnpHKXiHQKP7IW6LPvRa1WwaJhg3EnsN1rs-qp8liRfBTGemOGIkgP7DfOVB2IF6_ml6YKgtYMl33IBBTYSN9XWlSTvDsuf5MJjvk7BrtFtId_djn5plugcMYsnMgzfoChBw1_0QNFWUOOu3TfcZhcLwi7652jSEuVeahbzFTDJ5TRg8gnExqWsjh-8Vhc6oNRHEFbMDASlaalwGNFMiqPHCAtN1yusR99VfEaZxtPlqC-XNB-RcTED8tKjy5mF2z-XMfCnKcICqp0j48BlD75jDdRztk1m300Q",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/subscriber/my-invites",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"my-invites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriber/invite",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6c8018cb-b8d8-48c0-8129-53ddc6351745",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMjBjOTJhNTI1ZTliYjc0ZjI4ZjZlMGQ2MDhkZmJhNmYwOTczNGFiY2EyYzkyOWY0YzVmMzFlNGJhZjJhYmIwYTZmYWE4ODE1NDY0ZTNkMzkiLCJpYXQiOjE1ODQ5MTc1MDUsIm5iZiI6MTU4NDkxNzUwNSwiZXhwIjoxNjE2NDUzNTA1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.stA2wm72BWBcP0ZtaKey0zHWhDwxfFLlJaM49ZMdklYc3aPyqoq1aTopbpmRzzXPLm8H9-k9EV8jBGqjAHxWRVrYSjh9bx3hzReY-A6Rcw7MBaIgb-5nRGwVGlxZL8e7HJ5nZjAXEdgXVW3gIngEQfPM48sorkbuOl_eit56bmsu4WCAXUoOecyPe-pa1BS1f71N2f-gZs8Pn-enNXmRwC6xT5-QtIs8oHmRZ5R7WHKctwvAOWS_tjC_O3RGaFFFdIaWkTwVXDV4xdjR5Nt8FK10CHrjvV0sQDZQ4y-N-TRtrJU3MyVnIht3czW8pVQrciU2tUijXVyZmMaINgeN2EGGHWpnb4j_413NbSMQl6cvjGGnJMRed2CESOLztCB7VtmH2a9t64oaG9uJzAgoEfOwTamz9k-BYetjl9HM5MYA9O8MW9BBZWZyuvcLDZ-U0prvwoa4Gs2FZPkUkD-FA9tvTRBjcwy0qFxgsQznT0-t4LY1tDYv1A0WzYBJPVCYskJhmhU0lFYMsIXJ0kI73P11S7XMJeBF3enpNWlWIeXltuW1cqZx8NbXyFKEREJfkIhzh59KtaWp-wNRUlgzyOAbW7bp_K0PwRUVLns2UEUDPXEU4b_86WL96-pL4SG-2W5adBEZSVuLvSz0mlEhgHlhhwtq1xhuCuTaaiKG-ck",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "groupId",
+									"value": "13",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "16",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/subscriber/invite",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"invite"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a7df63e1-291e-4128-9bbe-3690f4ededda",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8fc35be0-0a72-4602-ac2f-cb3fc265ee38",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e936b961-a683-44c5-b1c3-461408363ed2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/api/login?email=john@meetup.net&password=password",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "john@meetup.net"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "92ffcf14-73aa-4b79-81c8-e189474bbc61",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjY2ZDIyMmEzNDc4YjI4YzI2OWI4ZGI2MGYyZWVkNmU4NTRmMzU0MWFmYjcwYzQ3YzYwMmZlODdjNTAzM2U4YzI0ZTQ3MGRlNTExMzZmYjYiLCJpYXQiOjE1ODMwNjE2NjksIm5iZiI6MTU4MzA2MTY2OSwiZXhwIjoxNjE0NTk3NjY5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.MEfszJ_MiZ2EzLqXRP6xyQTH2slzmyoq6Hk0UN96bieXXGRlwNMUEG7KPkqpWvSRSzNYNzhTTOwW3NzrXCTBoSGVX4iJz4OnHKhgjkf4dAVZ7rfvrDYUqn1HjTDQBlwP9o3hQrpiFGpqjzI7mq9UtlyeDoEPwKtJbkPL7hrxD12DCHJ1NQhWBLALujnU0-dt3fUGFKweQ60u1Mjw2OrFQoql9oAA2GC7kRtmrlpioxZEToli-ILp3IxiZmSRTiEmsCWOFQ9XGZWXGIZR4KnsLYIoYyvsQUuld-wweqyqiChKoTC2pDPGh3hv4L0ytiYU4jYqG_XqYjydmMUkS8CjBoqT2iBP2puQUGJHp0BHqp5pY86n-BeYYmluAAZApZ0rfDxWPIESDBRWIVu1Ka1RVMypGsLz9O7P46cGB2W28MR2UOAHBp1nHKIL_EQg9jM60EEGpSQaTQWmX43eKCoeSX_ZdTlCSNCI7UUmWFtIfP7v4Wo8YGQRIDQERt4tbhczPjD2TiSk64kfop9wCAxzis3KMkdkBPHROp2k-eaPTUQyq0pRERZPrWjkkQj8Zdxdp4sF0HCP2x1vlSFIuUZD-qMBH89g3kZfPw0NToshSpJZmkASJJe8_D4EdFarFF6OXMh8F3CydRpG3sOU2oa0Cc2KIT-YeIDJBkv9vHxvNRg",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/api/users",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d68ebc2a-958c-4140-80d6-2f54ffbfa5e4",
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.set(\"URL\", \"http://meetup.eu-central-1.elasticbeanstalk.com\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9c5517ae-e6a9-4a81-abe9-af11785bae03",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

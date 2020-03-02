@@ -12,6 +12,8 @@ Laravel is a web application framework with expressive, elegant syntax.
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## About  
+http://meetup.eu-central-1.elasticbeanstalk.com/
+
 Social network application has REST API service, Web UI ( VueJs support ).
 
 - User gets an invitation to become a member in a Group
@@ -44,10 +46,9 @@ Social network application has REST API service, Web UI ( VueJs support ).
     - __Homestead container env.__
     - __3 types of pagination__ *( api, simple, numeric)*
     - etc...
-
 - Mysql 5.7
 - Vuejs2 + npm	
-
+- Aws ElasticBeanstalk
 
 ## Rest Service: ##
 It's apis supported below
@@ -55,8 +56,8 @@ It's apis supported below
 - [GET] :  Retrieve list of groups, users and invitations 
 - [POST] : To send invitation
 
-Postman collections attached in ./meetup-data/
-
+Postman collections document: 
+https://documenter.getpostman.com/view/5428948/SzS8sQQf?version=latest
 ### Instructions
     >> Php artisan migrate  | php artisan migrate:refresh
     >> php artisan db:seed

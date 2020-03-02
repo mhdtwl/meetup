@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
+
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //Resource::withWrapping();
+        Schema::defaultStringLength(191);
+
     }
 }

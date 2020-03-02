@@ -23,7 +23,7 @@ class SubscriptionService extends Controller
 
     public function getMyPeople()
     {
-        return new UserCollection($this->getUserPeopleConnections());
+        return new SubscriptionCollection($this->getUserPeopleConnections());
     }
 
     public function getMyInvitations()
