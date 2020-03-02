@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "6e7635e6-f0c2-4bbb-af36-2f5d30d66219",
+		"name": "Meetup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "subscirber - profile",
+			"item": [
+				{
+					"name": "subscriber/my-groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjY2ZDIyMmEzNDc4YjI4YzI2OWI4ZGI2MGYyZWVkNmU4NTRmMzU0MWFmYjcwYzQ3YzYwMmZlODdjNTAzM2U4YzI0ZTQ3MGRlNTExMzZmYjYiLCJpYXQiOjE1ODMwNjE2NjksIm5iZiI6MTU4MzA2MTY2OSwiZXhwIjoxNjE0NTk3NjY5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.MEfszJ_MiZ2EzLqXRP6xyQTH2slzmyoq6Hk0UN96bieXXGRlwNMUEG7KPkqpWvSRSzNYNzhTTOwW3NzrXCTBoSGVX4iJz4OnHKhgjkf4dAVZ7rfvrDYUqn1HjTDQBlwP9o3hQrpiFGpqjzI7mq9UtlyeDoEPwKtJbkPL7hrxD12DCHJ1NQhWBLALujnU0-dt3fUGFKweQ60u1Mjw2OrFQoql9oAA2GC7kRtmrlpioxZEToli-ILp3IxiZmSRTiEmsCWOFQ9XGZWXGIZR4KnsLYIoYyvsQUuld-wweqyqiChKoTC2pDPGh3hv4L0ytiYU4jYqG_XqYjydmMUkS8CjBoqT2iBP2puQUGJHp0BHqp5pY86n-BeYYmluAAZApZ0rfDxWPIESDBRWIVu1Ka1RVMypGsLz9O7P46cGB2W28MR2UOAHBp1nHKIL_EQg9jM60EEGpSQaTQWmX43eKCoeSX_ZdTlCSNCI7UUmWFtIfP7v4Wo8YGQRIDQERt4tbhczPjD2TiSk64kfop9wCAxzis3KMkdkBPHROp2k-eaPTUQyq0pRERZPrWjkkQj8Zdxdp4sF0HCP2x1vlSFIuUZD-qMBH89g3kZfPw0NToshSpJZmkASJJe8_D4EdFarFF6OXMh8F3CydRpG3sOU2oa0Cc2KIT-YeIDJBkv9vHxvNRg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://meetup.me/api/subscriber/my-groups",
+							"protocol": "http",
+							"host": [
+								"meetup",
+								"me"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"my-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriber/my-users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjY2ZDIyMmEzNDc4YjI4YzI2OWI4ZGI2MGYyZWVkNmU4NTRmMzU0MWFmYjcwYzQ3YzYwMmZlODdjNTAzM2U4YzI0ZTQ3MGRlNTExMzZmYjYiLCJpYXQiOjE1ODMwNjE2NjksIm5iZiI6MTU4MzA2MTY2OSwiZXhwIjoxNjE0NTk3NjY5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.MEfszJ_MiZ2EzLqXRP6xyQTH2slzmyoq6Hk0UN96bieXXGRlwNMUEG7KPkqpWvSRSzNYNzhTTOwW3NzrXCTBoSGVX4iJz4OnHKhgjkf4dAVZ7rfvrDYUqn1HjTDQBlwP9o3hQrpiFGpqjzI7mq9UtlyeDoEPwKtJbkPL7hrxD12DCHJ1NQhWBLALujnU0-dt3fUGFKweQ60u1Mjw2OrFQoql9oAA2GC7kRtmrlpioxZEToli-ILp3IxiZmSRTiEmsCWOFQ9XGZWXGIZR4KnsLYIoYyvsQUuld-wweqyqiChKoTC2pDPGh3hv4L0ytiYU4jYqG_XqYjydmMUkS8CjBoqT2iBP2puQUGJHp0BHqp5pY86n-BeYYmluAAZApZ0rfDxWPIESDBRWIVu1Ka1RVMypGsLz9O7P46cGB2W28MR2UOAHBp1nHKIL_EQg9jM60EEGpSQaTQWmX43eKCoeSX_ZdTlCSNCI7UUmWFtIfP7v4Wo8YGQRIDQERt4tbhczPjD2TiSk64kfop9wCAxzis3KMkdkBPHROp2k-eaPTUQyq0pRERZPrWjkkQj8Zdxdp4sF0HCP2x1vlSFIuUZD-qMBH89g3kZfPw0NToshSpJZmkASJJe8_D4EdFarFF6OXMh8F3CydRpG3sOU2oa0Cc2KIT-YeIDJBkv9vHxvNRg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://meetup.me/api/subscriber/my-users",
+							"protocol": "http",
+							"host": [
+								"meetup",
+								"me"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"my-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriber/my-invites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjY2ZDIyMmEzNDc4YjI4YzI2OWI4ZGI2MGYyZWVkNmU4NTRmMzU0MWFmYjcwYzQ3YzYwMmZlODdjNTAzM2U4YzI0ZTQ3MGRlNTExMzZmYjYiLCJpYXQiOjE1ODMwNjE2NjksIm5iZiI6MTU4MzA2MTY2OSwiZXhwIjoxNjE0NTk3NjY5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.MEfszJ_MiZ2EzLqXRP6xyQTH2slzmyoq6Hk0UN96bieXXGRlwNMUEG7KPkqpWvSRSzNYNzhTTOwW3NzrXCTBoSGVX4iJz4OnHKhgjkf4dAVZ7rfvrDYUqn1HjTDQBlwP9o3hQrpiFGpqjzI7mq9UtlyeDoEPwKtJbkPL7hrxD12DCHJ1NQhWBLALujnU0-dt3fUGFKweQ60u1Mjw2OrFQoql9oAA2GC7kRtmrlpioxZEToli-ILp3IxiZmSRTiEmsCWOFQ9XGZWXGIZR4KnsLYIoYyvsQUuld-wweqyqiChKoTC2pDPGh3hv4L0ytiYU4jYqG_XqYjydmMUkS8CjBoqT2iBP2puQUGJHp0BHqp5pY86n-BeYYmluAAZApZ0rfDxWPIESDBRWIVu1Ka1RVMypGsLz9O7P46cGB2W28MR2UOAHBp1nHKIL_EQg9jM60EEGpSQaTQWmX43eKCoeSX_ZdTlCSNCI7UUmWFtIfP7v4Wo8YGQRIDQERt4tbhczPjD2TiSk64kfop9wCAxzis3KMkdkBPHROp2k-eaPTUQyq0pRERZPrWjkkQj8Zdxdp4sF0HCP2x1vlSFIuUZD-qMBH89g3kZfPw0NToshSpJZmkASJJe8_D4EdFarFF6OXMh8F3CydRpG3sOU2oa0Cc2KIT-YeIDJBkv9vHxvNRg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://meetup.me/api/subscriber/my-invites",
+							"protocol": "http",
+							"host": [
+								"meetup",
+								"me"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"my-invites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriber/invite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjY2ZDIyMmEzNDc4YjI4YzI2OWI4ZGI2MGYyZWVkNmU4NTRmMzU0MWFmYjcwYzQ3YzYwMmZlODdjNTAzM2U4YzI0ZTQ3MGRlNTExMzZmYjYiLCJpYXQiOjE1ODMwNjE2NjksIm5iZiI6MTU4MzA2MTY2OSwiZXhwIjoxNjE0NTk3NjY5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.MEfszJ_MiZ2EzLqXRP6xyQTH2slzmyoq6Hk0UN96bieXXGRlwNMUEG7KPkqpWvSRSzNYNzhTTOwW3NzrXCTBoSGVX4iJz4OnHKhgjkf4dAVZ7rfvrDYUqn1HjTDQBlwP9o3hQrpiFGpqjzI7mq9UtlyeDoEPwKtJbkPL7hrxD12DCHJ1NQhWBLALujnU0-dt3fUGFKweQ60u1Mjw2OrFQoql9oAA2GC7kRtmrlpioxZEToli-ILp3IxiZmSRTiEmsCWOFQ9XGZWXGIZR4KnsLYIoYyvsQUuld-wweqyqiChKoTC2pDPGh3hv4L0ytiYU4jYqG_XqYjydmMUkS8CjBoqT2iBP2puQUGJHp0BHqp5pY86n-BeYYmluAAZApZ0rfDxWPIESDBRWIVu1Ka1RVMypGsLz9O7P46cGB2W28MR2UOAHBp1nHKIL_EQg9jM60EEGpSQaTQWmX43eKCoeSX_ZdTlCSNCI7UUmWFtIfP7v4Wo8YGQRIDQERt4tbhczPjD2TiSk64kfop9wCAxzis3KMkdkBPHROp2k-eaPTUQyq0pRERZPrWjkkQj8Zdxdp4sF0HCP2x1vlSFIuUZD-qMBH89g3kZfPw0NToshSpJZmkASJJe8_D4EdFarFF6OXMh8F3CydRpG3sOU2oa0Cc2KIT-YeIDJBkv9vHxvNRg",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "groupId",
+									"value": "33",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "33",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://meetup.me/api/subscriber/invite/",
+							"protocol": "http",
+							"host": [
+								"meetup",
+								"me"
+							],
+							"path": [
+								"api",
+								"subscriber",
+								"invite",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a7df63e1-291e-4128-9bbe-3690f4ededda",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8fc35be0-0a72-4602-ac2f-cb3fc265ee38",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://meetup.me/api/login?email=john@meetup.net&password=password",
+					"protocol": "http",
+					"host": [
+						"meetup",
+						"me"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "john@meetup.net"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
+				"description": "loging"
+			},
+			"response": []
+		},
+		{
+			"name": "users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjY2ZDIyMmEzNDc4YjI4YzI2OWI4ZGI2MGYyZWVkNmU4NTRmMzU0MWFmYjcwYzQ3YzYwMmZlODdjNTAzM2U4YzI0ZTQ3MGRlNTExMzZmYjYiLCJpYXQiOjE1ODMwNjE2NjksIm5iZiI6MTU4MzA2MTY2OSwiZXhwIjoxNjE0NTk3NjY5LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.MEfszJ_MiZ2EzLqXRP6xyQTH2slzmyoq6Hk0UN96bieXXGRlwNMUEG7KPkqpWvSRSzNYNzhTTOwW3NzrXCTBoSGVX4iJz4OnHKhgjkf4dAVZ7rfvrDYUqn1HjTDQBlwP9o3hQrpiFGpqjzI7mq9UtlyeDoEPwKtJbkPL7hrxD12DCHJ1NQhWBLALujnU0-dt3fUGFKweQ60u1Mjw2OrFQoql9oAA2GC7kRtmrlpioxZEToli-ILp3IxiZmSRTiEmsCWOFQ9XGZWXGIZR4KnsLYIoYyvsQUuld-wweqyqiChKoTC2pDPGh3hv4L0ytiYU4jYqG_XqYjydmMUkS8CjBoqT2iBP2puQUGJHp0BHqp5pY86n-BeYYmluAAZApZ0rfDxWPIESDBRWIVu1Ka1RVMypGsLz9O7P46cGB2W28MR2UOAHBp1nHKIL_EQg9jM60EEGpSQaTQWmX43eKCoeSX_ZdTlCSNCI7UUmWFtIfP7v4Wo8YGQRIDQERt4tbhczPjD2TiSk64kfop9wCAxzis3KMkdkBPHROp2k-eaPTUQyq0pRERZPrWjkkQj8Zdxdp4sF0HCP2x1vlSFIuUZD-qMBH89g3kZfPw0NToshSpJZmkASJJe8_D4EdFarFF6OXMh8F3CydRpG3sOU2oa0Cc2KIT-YeIDJBkv9vHxvNRg",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://meetup.me/api/users",
+					"protocol": "http",
+					"host": [
+						"meetup",
+						"me"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
