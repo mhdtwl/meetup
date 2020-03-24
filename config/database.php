@@ -2,16 +2,18 @@
 
 use Illuminate\Support\Str;
 
-if (env('APP_ENV') === 'aws-eb-prod') {
-    define('DB_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
-    define('DB_DATABASE', $_SERVER['RDS_DB_NAME']);
-    define('DB_USERNAME', $_SERVER['RDS_USERNAME']);
-    define('DB_PASSWORD', $_SERVER['RDS_PASSWORD']);
-} else {
-    define('DB_HOSTNAME', env('DB_HOST', '127.0.0.1'));
-    define('DB_DATABASE', env('DB_DATABASE', 'forge'));
-    define('DB_USERNAME', env('DB_USERNAME', 'forge'));
-    define('DB_PASSWORD', env('DB_PASSWORD', ''));
+if(!defined('DB_VAR_HOSTNAME')) {
+    if (env('APP_ENV') === 'aws-eb-prod') {
+        define('DB_VAR_HOSTNAME', $_SERVER['RDS_HOSTNAME']);
+        define('DB_VAR_DATABASE', $_SERVER['RDS_DB_NAME']);
+        define('DB_VAR_USERNAME', $_SERVER['RDS_USERNAME']);
+        define('DB_VAR_PASSWORD', $_SERVER['RDS_PASSWORD']);
+    } else {
+        define('DB_VAR_HOSTNAME', env('DB_HOST', '127.0.0.1'));
+        define('DB_VAR_DATABASE', env('DB_DATABASE', 'forge'));
+        define('DB_VAR_USERNAME', env('DB_USERNAME', 'forge'));
+        define('DB_VAR_PASSWORD', env('DB_PASSWORD', ''));
+    }
 }
 
 return [
@@ -58,11 +60,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' =>  DB_HOSTNAME,
+            'host' =>  DB_VAR_HOSTNAME,
             'port' => env('DB_PORT', '3306'),
-            'database' => DB_DATABASE,
-            'username' => DB_USERNAME,
-            'password' => DB_PASSWORD,
+            'database' => DB_VAR_DATABASE,
+            'username' => DB_VAR_USERNAME,
+            'password' => DB_VAR_PASSWORD,
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

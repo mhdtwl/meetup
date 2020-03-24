@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InviteUserToGroup;
-use Illuminate\Http\Request;
+use App\Repositories\SubscriptionRepository;
 use App\Traits\SubscriptionTrait;
 use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
 {
     use  SubscriptionTrait;
+
+    protected $repository;
+
+    public function __construct()
+    {
+        $this->repository = new SubscriptionRepository();
+    }
 
     /**
      * Display a listing of the resource. // my connections
@@ -18,11 +25,10 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-
         return $this->myGroups();
     }
 
-    ///--------------------------------------Views -----------------
+    ///**********************  Views **********************
     public function myGroups()
     {
         return view('subscriptions.user.myGroups',
@@ -39,8 +45,7 @@ class SubscriptionController extends Controller
         return view('subscriptions.user.myInvites', ["subscriptions" => $this->getUserPendingInvitations()]);
     }
 
-    ///--------------------------- Actions -----------------
-
+    /// ****************************** Actions *******************************
     /**
      * Show user per group to invite
      * @param int $groupId

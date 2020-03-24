@@ -11,5 +11,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected const GUI_COLORS = ['default','primary','secondary','success','danger','warning','info','light','dark'];
+    protected const GUI_COLORS = ['primary','secondary','success','danger','warning','info'];
 }

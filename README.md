@@ -38,12 +38,12 @@ Social network application has REST API service, Web UI ( VueJs support ).
 ## Technologies :
 
  - Laravel 6, + Php 7.4 + PHPUnit 8.5.2
-    - __Laravel-mix__  Djs/css Webpack compiler*
+    - __Homestead container env.__
     - __Carbon__  *(Human) Readable Dates.*
     - __Passport__  *oauth*
     - __Factory Faker + Seeder__ *store fake data* 
+    - __Laravel-mix__  Djs/css Webpack compiler*
     - __Resource for each Entity Model represented__ *filter json response*
-    - __Homestead container env.__
     - __3 types of pagination__ *( api, simple, numeric)*
     - etc...
 - Mysql 5.7
@@ -58,18 +58,24 @@ It's apis supported below
 
 Postman collections document: 
 https://documenter.getpostman.com/view/5428948/SzS8sQQf?version=latest
-### Instructions
-    >> Php artisan migrate  | php artisan migrate:refresh
-    >> php artisan db:seed
-    >> php artisan passport:install
+### Instructions 
+###### Install php/js libraries
+    >>> composer install
+    >>> npm install
+###### Prepare database
+    >>> Php artisan migrate  | php artisan migrate:refresh
+    >>> php artisan db:seed
+    >>> php artisan passport:install
 
 ### Run below commands:
-#### When a Change on Php code? 
-###### Make sure [.env →  APP_DEBUG=false ] and run:
-    >> ./vendor/bin/phpunit
-    >> ./vendor/bin/phpstan analyse
+As a recommendation, test the code after any change...
+
+> Make sure [.env →  APP_DEBUG=false ] and run:
+
+    >>> ./vendor/bin/phpunit
+    >>> ./vendor/bin/phpstan analyse
 ##### On js/css files:
-	>> npm run dev
+	>>> npm run dev
 
 
 

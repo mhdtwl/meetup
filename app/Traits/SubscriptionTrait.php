@@ -2,25 +2,22 @@
 
 namespace App\Traits;
 
-use App\Group;
+use App\{Subscription, Group, User};
+use Illuminate\Pagination\{Paginator, LengthAwarePaginator};
 use App\Http\Requests\InviteUserToGroup;
-use App\Subscription;
-use App\User;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
+use App\Repositories\SubscriptionRepository;
 use Illuminate\Support\Facades\Auth;
 
 trait SubscriptionTrait
 {
-    //---------------------- View -----------------------------
-
+    //***********************************    View    *********************************
     /**
      * @return Paginator
      */
     public function getUserGroupConnections(): Paginator
     {
         $id = Auth::id();
-        return Subscription::connectedGroups($id)->simplePaginate(Subscription::PAGINATION_OFFSET);
+        return $this->repository->connectedGroups($id)->simplePaginate(SubscriptionRepository::PAGINATION_OFFSET);
     }
 
     /**
@@ -29,7 +26,7 @@ trait SubscriptionTrait
     public function getUserPeopleConnections(): LengthAwarePaginator
     {
         $id = Auth::id();
-        return Subscription::myCurrentUsers($id)->paginate(Subscription::PAGINATION_OFFSET);
+        return $this->repository->myCurrentUsers($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
     }
 
     /**
@@ -38,15 +35,17 @@ trait SubscriptionTrait
     public function getUserPendingInvitations(): LengthAwarePaginator
     {
         $id = Auth::id();
-        return Subscription::myInvitations($id)->paginate(Subscription::PAGINATION_OFFSET);
+        return $this->repository->myInvitations($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
     }
 
-    /***********************************    Action    *********************************
+    //***********************************    Action    *********************************
+
+    /**
      * @param int $groupId
      * @param int $userId
      * @return array
      */
-    public function retrieveUserToInviteByGroupId($groupId=0, $userId=0): array
+    public function retrieveUserToInviteByGroupId($groupId = 0, $userId = 0): array
     {
         $group = Group::findorFail($groupId);
         $user = User::findorFail($userId);
@@ -62,10 +61,9 @@ trait SubscriptionTrait
     {
         $id = Auth::id();
         $group = Group::findorFail($groupId);
-        $suggestedUsers = Subscription::unconnectedUsers($id)->paginate(Subscription::PAGINATION_OFFSET);
+        $suggestedUsers = $this->repository->unconnectedUsers($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
         return ['users' => $suggestedUsers, 'group' => $group];
     }
-
 
     /**
      * Create invitation by groupId & userId into db.
@@ -82,6 +80,4 @@ trait SubscriptionTrait
         $subscription->save();
         return $subscription;
     }
-
-
 }

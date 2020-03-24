@@ -15,7 +15,6 @@ trait SearchableTrait
         //-- validation dir
         $dirInput = $request->input('dir') ?? 'asc';// asc default
         $orderDirection = $dirInput;
-        //dd(['Column' => $orderColumn, 'Direction' => $orderDirection]);
         return ['Column' => $orderColumn, 'Direction' => $orderDirection];
     }
     private function getDataObjectFiltered($query, $searchValue, $searchColumns)
