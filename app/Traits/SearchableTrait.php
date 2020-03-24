@@ -3,12 +3,24 @@
 namespace App\Traits;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Trait SearchableTrait
+ * @package App\Traits
+ */
 trait SearchableTrait
 {
-    private function getRequestColumnAndDirection($request, $columns)
+    /**
+     * @param Request $request
+     * @param array $columns
+     * @return array
+     */
+    private function getRequestColumnAndDirection(Request $request, array $columns): array
     {
         $orderIndex = $request->input('column');
         $orderColumn = array_key_exists($orderIndex, $columns) ? $columns[$orderIndex] : $columns[0];
@@ -17,7 +29,14 @@ trait SearchableTrait
         $orderDirection = $dirInput;
         return ['Column' => $orderColumn, 'Direction' => $orderDirection];
     }
-    private function getDataObjectFiltered($query, $searchValue, $searchColumns)
+
+    /**
+     * @param Builder $query
+     * @param string|null $searchValue
+     * @param Collection $searchColumns
+     * @return Builder
+     */
+    private function getDataObjectFiltered(Builder $query, ?string $searchValue, Collection $searchColumns): Builder
     {
 
         if ($searchValue && count($searchColumns) > 0) {
@@ -32,13 +51,20 @@ trait SearchableTrait
         return $query;
     }
 
-    public function getObjectSearchableData(Request $request, $objectQuery, $columnsArray = null)
+
+    /**
+     * @param Request $request
+     * @param Builder $objectQuery
+     * @param array|null $columnsArray
+     * @return LengthAwarePaginator
+     */
+    public function getObjectSearchableData(Request $request, Builder $objectQuery, ?array $columnsArray)
     {
         $searchColumns = collect($columnsArray['searchColumns']);
         $columns = $columnsArray['dataTableColumns'];
         // validation
 
-        Validator::make($request->all(),[//$request->validate([ $request->all(),
+        Validator::make($request->all(), [//$request->validate([ $request->all(),
             'draw' => 'numeric',
             'length' => 'numeric',
             'search' => 'nullable|string',
@@ -62,7 +88,14 @@ trait SearchableTrait
         // paginate
         return $objectQueryFiltered->paginate($length);
     }
-    public function drawSearchableTable(Request $request, $objectQuery, $columnsArray = null)
+
+    /**
+     * @param Request $request
+     * @param Builder $objectQuery
+     * @param array $columnsArray
+     * @return array
+     */
+    public function drawSearchableTable(Request $request, Builder $objectQuery, ?array $columnsArray): array
     {
         $items = $this->getObjectSearchableData($request, $objectQuery, $columnsArray);
         // return

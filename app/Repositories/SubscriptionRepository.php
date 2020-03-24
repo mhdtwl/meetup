@@ -89,10 +89,10 @@ class SubscriptionRepository
 
     /**
      * List of people who a user has at least one connection in a group.
-     * @param null $userId
+     * @param int $userId
      * @return mixed
      */
-    public function myCurrentUsers($userId = null)
+    public function myCurrentUsers($userId = 0)
     {
         return Subscription::whereIn('group_id', $this->connectedGroupIds($userId))
             ->where('user_id', '<>', $userId)

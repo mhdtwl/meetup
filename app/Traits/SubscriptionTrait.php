@@ -3,11 +3,15 @@
 namespace App\Traits;
 
 use App\{Subscription, Group, User};
-use Illuminate\Pagination\{Paginator, LengthAwarePaginator};
 use App\Http\Requests\InviteUserToGroup;
 use App\Repositories\SubscriptionRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\{Paginator, LengthAwarePaginator};
 
+/**
+ * Trait SubscriptionTrait
+ * @package App\Traits
+ */
 trait SubscriptionTrait
 {
     //***********************************    View    *********************************
@@ -17,7 +21,7 @@ trait SubscriptionTrait
     public function getUserGroupConnections(): Paginator
     {
         $id = Auth::id();
-        return $this->repository->connectedGroups($id)->simplePaginate(SubscriptionRepository::PAGINATION_OFFSET);
+        return $this->service->getRepository()->connectedGroups($id)->simplePaginate(SubscriptionRepository::PAGINATION_OFFSET);
     }
 
     /**
@@ -26,7 +30,7 @@ trait SubscriptionTrait
     public function getUserPeopleConnections(): LengthAwarePaginator
     {
         $id = Auth::id();
-        return $this->repository->myCurrentUsers($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
+        return $this->service->getRepository()->myCurrentUsers($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
     }
 
     /**
@@ -35,7 +39,7 @@ trait SubscriptionTrait
     public function getUserPendingInvitations(): LengthAwarePaginator
     {
         $id = Auth::id();
-        return $this->repository->myInvitations($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
+        return $this->service->getRepository()->myInvitations($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
     }
 
     //***********************************    Action    *********************************
@@ -61,7 +65,7 @@ trait SubscriptionTrait
     {
         $id = Auth::id();
         $group = Group::findorFail($groupId);
-        $suggestedUsers = $this->repository->unconnectedUsers($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
+        $suggestedUsers = $this->service->getRepository()->unconnectedUsers($id)->paginate(SubscriptionRepository::PAGINATION_OFFSET);
         return ['users' => $suggestedUsers, 'group' => $group];
     }
 

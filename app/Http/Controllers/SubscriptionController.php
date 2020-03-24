@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InviteUserToGroup;
-use App\Repositories\SubscriptionRepository;
+use App\Services\SubscriptionService;
 use App\Traits\SubscriptionTrait;
 use Illuminate\Support\Facades\Validator;
 
@@ -11,11 +11,11 @@ class SubscriptionController extends Controller
 {
     use  SubscriptionTrait;
 
-    protected $repository;
+    protected $service;
 
     public function __construct()
     {
-        $this->repository = new SubscriptionRepository();
+        $this->service = new SubscriptionService();
     }
 
     /**
